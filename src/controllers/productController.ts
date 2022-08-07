@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import ProductService from '../services/productService';
 import Product from '../interfaces/product.interface';
 
@@ -13,10 +14,10 @@ export default class ProductController {
     const product: Product = req.body;
     try {
       const newProduct = await this.productService.postProduct(product);
-      return res.status(201).json(newProduct);
+      return res.status(StatusCodes.CREATED).json(newProduct);
     } catch (err) {
       console.log('Erro no controller ProductController: ', err);
-      return res.status(400).json('Bad Request');
+      return res.status(StatusCodes.BAD_REQUEST).json('Bad Request');
     }
   };
 }
